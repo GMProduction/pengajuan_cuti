@@ -71,7 +71,7 @@
                     <h5 class="modal-title" id="modaltambahuser">Tambah Karyawan</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form id="form" onsubmit="">
+                <form id="form" onsubmit="return createKaryawan()">
                     @csrf
                     <input hidden id="id" name="id">
                     <div class="modal-body">
@@ -127,7 +127,7 @@
                     <div class=" m-3">
 
                         <div class="text-center">
-                            <a class="btn-utama">Simpan</a>
+                            <button type="submit" class="btn-utama">Simpan</button>
                         </div>
 
 
@@ -160,6 +160,11 @@
         })
 
         function createKaryawan() {
+            saveData('Tambah karyawan','form',window.location.pathname,afterSave);
+            return false;
+        }
+
+        function afterSave() {
 
         }
     </script>

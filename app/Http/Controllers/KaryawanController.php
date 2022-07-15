@@ -17,7 +17,7 @@ class KaryawanController extends Controller
      */
     public function index()
     {
-        if (\request()->isMethod('POST')){
+        if (\request()->isMethod('POST')) {
             return $this->create();
         }
         $data = User::with('karyawan')->paginate(10);
@@ -65,6 +65,7 @@ class KaryawanController extends Controller
                     'nama'  => 'required',
                     'nip'   => 'required',
                     'no_hp' => 'required',
+                    'foto'  => 'required',
                 ]
             );
 
@@ -75,9 +76,9 @@ class KaryawanController extends Controller
 
         DB::beginTransaction();
         try {
-            if (\request('id')){
+            if (\request('id')) {
 
-            }else{
+            } else {
                 $user = new User();
                 $user->create($fieldUser);
                 $user->karyawan()->create($fieldMember);
@@ -85,7 +86,7 @@ class KaryawanController extends Controller
             DB::commit();
 
             return response()->json(['msg' => 'success']);
-        }  catch (\Exception $er) {
+        } catch (\Exception $er) {
             DB::rollBack();
 
             return response()->json(['msg' => $er->getMessage()], 500);
