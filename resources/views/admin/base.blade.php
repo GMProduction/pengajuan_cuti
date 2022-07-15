@@ -114,7 +114,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link menu @if ($sidebar == 'transaksi') active @endif" href="/admin/transaksi">
+                    <a class="nav-link menu @if ($sidebar == 'cuti') active @endif" href="/admin/pengajuan-cuti">
                         <i class="material-icons menu-icon">content_paste</i>
                         <p class="menu-text">Pengajuan Cuti</p>
                     </a>
@@ -197,6 +197,7 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
 
     <script src="{{ asset('js/base.js') }}"></script>
+    <script src="{{ asset('js/dialog.js') }}"></script>
     <script type="text/javascript" src="{{ asset('datatable/datatables.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('datatable/select.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('vitalets-bootstrap-datepicker/js/bootstrap-datepicker.js') }}"></script>
