@@ -1,8 +1,9 @@
 <?php
 
+use App\Http\Controllers\AbsensiController;
+use App\Http\Controllers\AbsensiKaryawanController;
 use App\Http\Controllers\BerandaController;
 use App\Http\Controllers\KaryawanController;
-use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\LaporanPesananController;
 use App\Http\Controllers\DaftarController;
 use App\Http\Controllers\LoginController;
