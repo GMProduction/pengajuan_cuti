@@ -1,8 +1,9 @@
 <?php
 
+use App\Http\Controllers\AbsensiController;
+use App\Http\Controllers\AbsensiKaryawanController;
 use App\Http\Controllers\BerandaController;
 use App\Http\Controllers\KaryawanController;
-use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\LaporanPesananController;
 use App\Http\Controllers\DaftarController;
 use App\Http\Controllers\LoginController;
@@ -36,13 +37,16 @@ Route::get('/admin/user', function () {
     return view('admin.user');
 });
 
+Route::get('/karyawan', [AbsensiKaryawanController::class, 'index']);
+
+
 Route::get('/admin', [BerandaController::class, 'index']);
 Route::get('/admin/beranda', [BerandaController::class, 'index']);
 Route::get('/admin/user', [UserController::class, 'index']);
 Route::get('/admin/karyawan', [KaryawanController::class, 'index']);
 Route::get('/admin/barang', [BarangController::class, 'index']);
-Route::get('/admin/transaksi', [TransaksiController::class, 'index']);
-Route::get('/admin/transaksi/cetak/{id}', [TransaksiController::class, 'cetakLaporan']);
+Route::get('/admin/transaksi', [AbsensiController::class, 'index']);
+Route::get('/admin/transaksi/cetak/{id}', [AbsensiController::class, 'cetakLaporan']);
 Route::get('/admin/laporanpesanan', [LaporanPesananController::class, 'index']);
 Route::get('/admin/masterbarang', [MasterBarangController::class, 'index']);
 Route::get('/admin/masterpelanggan', [MasterPelangganController::class, 'index']);

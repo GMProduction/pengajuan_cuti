@@ -4,12 +4,12 @@
     <div>
 
         <div class="row">
-            <div class="col-4">
+            <div class="col-8">
 
 
                 <div class="panel">
                     <div class="title">
-                        <p>Pesanan Terbaru</p>
+                        <p>Pengajuan Cuti</p>
                         {{-- <a class="btn-utama-soft  rnd ">Pesanan Baru <i
                                 class="material-icons menu-icon ms-2">add_circle</i></a> --}}
                     </div>
@@ -19,11 +19,12 @@
                             <table id="table_id" class="table table-striped" style="width:100%">
                                 <thead>
                                     <tr>
-                                        <th>No Transaksi</th>
+                                        <th>No</th>
                                         <th>Nama Karyawan</th>
-                                        <th>Tanggal</th>
+                                        <th>Tanggal Awal</th>
                                         {{-- <th>Catatan</th> --}}
-                                        <th>Status Pesanan</th>
+                                        <th>Tanggal Akhir</th>
+                                        <th>Status</th>
                                         {{-- <th>Action</th> --}}
                                     </tr>
                                 </thead>
@@ -33,7 +34,8 @@
                                         <td>Karyawan Anak Pak Joko</td>
                                         <td>12 Juni 2022</td>
                                         {{-- <td>Pesan banyak</td> --}}
-                                        <td>2011-04-25</td>
+                                        <td>14 Juni 2022</td>
+                                        <td>Pending</td>
                                         {{-- <td class="d-flex ">
                                             <a class="btn-utama sml rnd me-1 d-flex justify-content-center"
                                                 data-bs-toggle="modal" data-bs-target="#detailTransaksi">Detail <i
@@ -52,35 +54,21 @@
                 </div>
             </div>
 
-            <div class="col-8">
+            <div class="col-4">
 
                 <div class="panel">
 
-                    <div class="title">
+                    {{-- <div class="title">
                         <p>Detail</p>
                         <a class="btn-accent  rnd ">Cetak <i
                             class="material-icons menu-icon ms-2">print</i></a>
 
-                    </div>
+                    </div> --}}
 
                     <div class="isi">
                         <div class="row">
-                            <div class="col-4">
-                                <p class="fw-bold">Data Transaksi</p>
 
-                                <div class="form-floating mb-1">
-                                    <input type="text" class="form-control" id="dt_tanggal" name="dt_tanggal" disabled
-                                        placeholder="no_hp">
-                                    <label for="dt_tanggal" class="form-label">Tanggal</label>
-                                </div>
-
-                                <div class="form-floating">
-                                    <textarea class="form-control" placeholder="Leave a comment here" id="dt_alamat" disabled style="height: 100px"></textarea>
-                                    <label for="dt_alamat">Catatan</label>
-                                </div>
-
-                            </div>
-                            <div class="col-4">
+                            <div class="col-8">
                                 <p class="fw-bold">Data Karyawan</p>
                                 <div class="form-floating mb-1">
                                     <input type="text" class="form-control" id="dk_namakaryawan" disabled
@@ -88,19 +76,10 @@
                                     <label for="dk_namakaryawan" class="form-label">Nama Karyawan</label>
                                 </div>
 
-                                <div class="form-floating">
+                                <div class="form-floating mb-1">
                                     <textarea class="form-control" placeholder="Leave a comment here" id="dk_alamat" disabled style="height: 100px"></textarea>
                                     <label for="dk_alamat">Alamat</label>
                                 </div>
-
-
-
-
-                            </div>
-
-                            <div class="col-4">
-                                <p class="fw-bold">.</p>
-
 
                                 <div class="form-floating mb-1">
                                     <input type="text" class="form-control" id="dk_username" name="dk_username" disabled
@@ -114,57 +93,57 @@
                                     <label for="dk_nohpkaryawan" class="form-label">No Hp</label>
                                 </div>
 
+                                <div class="form-floating mb-5">
+                                    <input type="text" class="form-control" id="dk_sisacuti" name="dk_sisacuti" disabled
+                                        placeholder="no_hp">
+                                    <label for="dk_sisacuti" class="form-label">Sisa Cuti</label>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <img style="width: 100%" src="{{ asset('images/local/karyawan.png') }}" />
+                            </div>
+                            <div class="col-12">
+                                <p class="fw-bold">Pengajuan Cuti</p>
+
+                                <div class="form-floating mb-1">
+                                    <input type="text" class="form-control" id="dk_totalhari" disabled
+                                        name="dk_totalhari" placeholder="Karyawan">
+                                    <label for="dk_totalhari" class="form-label">Total Hari Cuti</label>
+                                </div>
+
+                                <div class="form-floating mb-1">
+                                    <input type="text" class="form-control" id="dk_daritanggal" disabled
+                                        name="dk_daritanggal" placeholder="Karyawan">
+                                    <label for="dk_daritanggal" class="form-label">Dari Tanggal</label>
+                                </div>
+
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" id="dk_sampaitanggal" disabled
+                                        name="dk_sampaitanggal" placeholder="Karyawan">
+                                    <label for="dk_sampaitanggal" class="form-label">Sampai Tanggal</label>
+                                </div>
+
+                                <div class="form-floating mb-1">
+                                    <input type="text" class="form-control" id="dk_keterangan" disabled
+                                        name="dk_keterangan" placeholder="Karyawan">
+                                    <label for="dk_keterangan" class="form-label">Keterangan</label>
+                                </div>
+
+
+                                <div class="d-flex">
+                                    <a class="btn-utama me-2">Terima</a>
+                                    <a class="btn-danger ">Tolak</a>
+                                </div>
                             </div>
 
+
+
                         </div>
                     </div>
 
                 </div>
 
-                <div class="panel">
-                    <div class="title">
-                        <p>Data Barang yang dipesan</p>
-                        {{-- <a class="btn-utama-soft  rnd ">Pesanan Baru <i
-                                class="material-icons menu-icon ms-2">add_circle</i></a> --}}
-                    </div>
 
-                    <div class="isi">
-                        <div class="table">
-                            <table id="table_detail" class="table table-striped" style="width:100%">
-                                <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Nama Barang</th>
-                                        <th>Jumlah</th>
-                                        <th>Status</th>
-                                        <th>Qty disetujui</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Bed</td>
-                                        <td>5</td>
-                                        <td>Pending</td>
-                                        <td>5</td>
-                                        <td class="d-flex ">
-                                            <a class="btn-utama sml rnd me-1 d-flex justify-content-center"
-                                                data-bs-toggle="modal" data-bs-target="#modalChangeQty">Ganti Jumlah yang disetujui <i
-                                                    class="material-icons menu-icon ms-2">info</i></a>
-
-                                            <a class="btn-success sml rnd me-1 d-flex justify-content-center">Terima <i
-                                                    class="material-icons menu-icon ms-2">check_circle</i></a>
-
-                                            <a class="btn-danger sml rnd me-1 d-flex justify-content-center">Tolak <i
-                                                    class="material-icons menu-icon ms-2">dangerous</i></a>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
 
@@ -241,6 +220,8 @@
                                 placeholder="qty_diterima">
                             <label for="qty_diterima" class="form-label">Jumlah yang disetujui</label>
                         </div>
+
+
 
 
                     </div>

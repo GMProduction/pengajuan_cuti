@@ -97,7 +97,7 @@
                         </div>
 
                         <div class="mb-3">
-                            <label for="fotobarang" class="form-label">Foto Barang</label>
+                            <label for="fotobarang" class="form-label">Foto Karyawan</label>
                             <input class="form-control" type="file" id="fotobarang">
                         </div>
 

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 
-class TransaksiController extends Controller
+class AbsensiKaryawanController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class TransaksiController extends Controller
      */
     public function index()
     {
-        return view('admin.transaksi', ['sidebar' => 'transaksi']);
+        return view('karyawan.pengajuancuti', ['sidebar' => 'transaksi']);
     }
 
     /**

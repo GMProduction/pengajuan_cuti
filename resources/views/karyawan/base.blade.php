@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Skripsi || Admin</title>
+    <title>Skripsi || Kayrawan</title>
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
@@ -64,7 +64,7 @@
             <ul class="nav flex-column" id="nav_accordion">
 
                 <li class="nav-item">
-                    <a class="title-role" href="#"> Admin </a>
+                    <a class="title-role" href="#"> Karyawan </a>
                 </li>
 
                 {{-- <li class="nav-item">
@@ -91,12 +91,12 @@
                 </li> --}}
 
 
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a class="nav-link menu @if ($sidebar == 'beranda') active @endif " href="/admin">
                         <i class="material-icons menu-icon">home</i>
                         <p class="menu-text">Beranda</p>
                     </a>
-                </li>
+                </li> --}}
 
                 {{-- <li class="nav-item">
                     <a class="nav-link menu @if ($sidebar == 'user') active @endif" href="/admin/user">
@@ -106,12 +106,12 @@
                 </li> --}}
 
 
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a class="nav-link menu @if ($sidebar == 'karyawan') active @endif" href="/admin/karyawan">
                         <i class="material-icons menu-icon">group</i>
                         <p class="menu-text">Karyawan</p>
                     </a>
-                </li>
+                </li> --}}
 
                 <li class="nav-item">
                     <a class="nav-link menu @if ($sidebar == 'transaksi') active @endif" href="/admin/transaksi">
