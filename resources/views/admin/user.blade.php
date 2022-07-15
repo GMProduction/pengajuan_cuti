@@ -1,10 +1,6 @@
 @extends('admin.base')
 
 @section('content')
-    <div>
-
-
-
         <div class="panel">
             <div class="title">
                 <p>Data User</p>

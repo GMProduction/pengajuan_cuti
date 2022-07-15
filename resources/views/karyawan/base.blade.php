@@ -47,10 +47,9 @@
             </a>
 
             <ul class="dropdown-menu custom" aria-labelledby="dropdownprofile">
-                <li><a class="dropdown-item disabled" href="#">pradanamahendra@gmail.com</a></li>
+                <li><a class="dropdown-item disabled" href="#">{{auth()->user()->karyawan->nama}}</a></li>
                 <hr>
-                <li><a class="dropdown-item" href="#">Another action</a></li>
-                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                <li><a class="dropdown-item" href="/logout">Logout</a></li>
             </ul>
 
         </div>
@@ -114,7 +113,7 @@
                 </li> --}}
 
                 <li class="nav-item">
-                    <a class="nav-link menu @if ($sidebar == 'transaksi') active @endif" href="/admin/transaksi">
+                    <a class="nav-link menu @if ($sidebar == 'cuti') active @endif" href="/admin/transaksi">
                         <i class="material-icons menu-icon">content_paste</i>
                         <p class="menu-text">Pengajuan Cuti</p>
                     </a>
@@ -197,6 +196,8 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
 
     <script src="{{ asset('js/base.js') }}"></script>
+    <script src="{{ asset('js/dialog.js') }}"></script>
+    <script src="{{ asset('js/swal.js') }}"></script>
     <script type="text/javascript" src="{{ asset('datatable/datatables.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('datatable/select.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('vitalets-bootstrap-datepicker/js/bootstrap-datepicker.js') }}"></script>

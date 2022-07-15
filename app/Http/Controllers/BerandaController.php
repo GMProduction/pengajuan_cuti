@@ -2,83 +2,47 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Karyawan;
+use App\Models\PengajuanCuti;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Date;
 
 class BerandaController extends Controller
 {
+
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function index()
     {
-        return view('admin.beranda', ['sidebar' => 'beranda']);
+        $now        = date('Y-m-d');
+        $karyawan   = $this->dataKaryawan();
+        $jumlahCuti = $this->dataKaryawanCuti();
+        $cuti       = PengajuanCuti::with('karyawan')->where('status', '=', 1)->where('tanggal_mulai', '<=', $now)->where('tanggal_selesai', '>=', $now)->paginate(10);
+
+        return view('admin.beranda', ['sidebar' => 'beranda', 'data' => $cuti, 'karyawan' => $karyawan, 'jumlahCuti' => $jumlahCuti]);
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @return mixed
      */
-    public function create()
+    public function dataKaryawan()
     {
-        //
+        $user = Karyawan::count('*');
+
+        return $user;
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return mixed
      */
-    public function store(Request $request)
+    public function dataKaryawanCuti()
     {
-        //
+        $now  = date('Y-m-d');
+        $user = PengajuanCuti::where('tanggal_mulai', '<=', $now)->where('tanggal_selesai', '>=', $now)->count('*');
+
+        return $user;
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }

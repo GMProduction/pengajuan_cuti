@@ -17,7 +17,7 @@
                                     <img src="{{ asset('images/local/karyawan.png') }}" />
                                     <div class="content">
                                         <p class="nama">Data Karyawan</p>
-                                        <p class="nilai">250</p>
+                                        <p class="nilai">{{$karyawan}}</p>
                                         {{-- <p class="status">75% naik</p> --}}
                                     </div>
                                 </div>
@@ -28,7 +28,7 @@
                                     <img src="{{ asset('images/local/cuti.png') }}" />
                                     <div class="content">
                                         <p class="nama">Karyawan Sedang Cuti</p>
-                                        <p class="nilai">5</p>
+                                        <p class="nilai">{{$jumlahCuti}}</p>
                                         {{-- <p class="status">75% naik</p> --}}
                                     </div>
                                 </div>
@@ -71,20 +71,19 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                @forelse($data as $key => $d)
                                     <tr>
-                                        <td>1</td>
-                                        <td>10145678</td>
-                                        <td>Bagus</td>
-                                        <td>12 April 2022</td>
-                                        <td>12 Juni 2022</td>
-                                        {{-- <td class="d-flex">
-                                            <a class="btn-success sml rnd me-1">Edit <i
-                                                    class="material-icons menu-icon ms-2">edit</i></a>
-
-                                            <a class="btn-danger sml rnd ">Hapus <i
-                                                    class="material-icons menu-icon ms-2">delete</i></a>
-                                        </td> --}}
+                                        <td>{{$data->firstItem() + $key}}</td>
+                                        <td>{{$d->karyawan->nip}}</td>
+                                        <td>{{$d->karyawan->nama}}</td>
+                                        <td>{{date('d F Y', strtotime($d->tanggal_mulai))}}</td>
+                                        <td>{{date('d F Y', strtotime($d->tanggal_selesai))}}</td>
                                     </tr>
+                                @empty
+                                    <tr>
+                                        <td class="text-center" colspan="5">Tidak ada data guru</td>
+                                    </tr>
+                                @endforelse
 
                                 </tbody>
 
@@ -109,6 +108,8 @@
             $('#table_id').DataTable();
             $('#table_piutang').DataTable();
         });
+
+
     </script>
 @endsection
 

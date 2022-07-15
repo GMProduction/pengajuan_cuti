@@ -15,5 +15,10 @@ class PengajuanCuti extends Model
         'tanggal_selesai',
         'total_hari',
         'status',
+        'keterangan'
     ];
+
+    public function karyawan(){
+        return $this->belongsTo(Karyawan::class, 'karyawan_id');
+    }
 }

@@ -15,6 +15,11 @@ class Karyawan extends Model
         'nip',
         'no_hp',
         'sisa_cuti',
+        'alamat',
         'foto',
     ];
+
+    public function user(){
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }

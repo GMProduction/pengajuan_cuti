@@ -24,37 +24,46 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('auth.login');
-});
+Route::get(
+    '/admin',
+    function () {
+        return view('login.beranda');
+    }
+);
 
-Route::get('/admin', function () {
-    return view('login.beranda');
-});
+Route::get(
+    '/admin/user',
+    function () {
+        return view('admin.user');
+    }
+);
+
+Route::prefix("pengajuan-cuti")->middleware(\App\Http\Middleware\PimpinanMiddleware::class)->group(
+    function () {
+        Route::get('', [\App\Http\Controllers\PengajuanCutiController::class, 'index']);
+        Route::match(['POST', 'GET'], '/{id}', [\App\Http\Controllers\PengajuanCutiController::class, 'detailCuti']);
+    }
+);
+
+Route::prefix('admin')->middleware(\App\Http\Middleware\AdminMiddleware::class)->group(
+    function () {
+        Route::get('', [BerandaController::class, 'index']);
+        Route::prefix('karyawan')->group(
+            function () {
+                Route::match(['POST', 'GET'], '', [KaryawanController::class, 'index']);
+                Route::get('datatable', [KaryawanController::class, 'datatable']);
+                Route::post('delete/{id}', [KaryawanController::class, 'destroy']);
+            }
+        );
+
+        Route::get('count-worker', [BerandaController::class,'dataKaryawan']);
+        Route::get('count-off', [BerandaController::class,'dataKaryawanCuti']);
+    }
+);
+
+Route::match(['POST', 'GET'], 'karyawan', [\App\Http\Controllers\Karyawan\KaryawanController::class, 'index'])->middleware(\App\Http\Middleware\KaryawanMiddleware::class);
 
 
-Route::get('/admin/user', function () {
-    return view('admin.user');
-});
+Route::match(['POST', 'GET'], '/', [LoginController::class, 'index'])->middleware('guest');
+Route::get('/logout',[LoginController::class,'logout'])->middleware('auth');
 
-Route::prefix('admin')->group(function (){
-    Route::get('', [BerandaController::class, 'index']);
-    Route::prefix('karyawan')->group(function (){
-        Route::match(['POST','GET'],'', [KaryawanController::class, 'index']);
-        Route::get('datatable', [KaryawanController::class, 'datatable']);
-    });
-    Route::get('pengajuan-cuti', [\App\Http\Controllers\PengajuanCutiController::class, 'index']);
-
-});
-
-Route::get('/admin/beranda', [BerandaController::class, 'index']);
-Route::get('/admin/user', [UserController::class, 'index']);
-Route::get('/admin/barang', [BarangController::class, 'index']);
-Route::get('/admin/transaksi/cetak/{id}', [TransaksiController::class, 'cetakLaporan']);
-Route::get('/admin/laporanpesanan', [LaporanPesananController::class, 'index']);
-Route::get('/admin/masterbarang', [MasterBarangController::class, 'index']);
-Route::get('/admin/masterpelanggan', [MasterPelangganController::class, 'index']);
-
-Route::get('/login', [LoginController::class, 'index']);
-Route::get('/daftar', [DaftarController::class, 'index']);
-Route::post('/daftar', [DaftarController::class, 'store']);

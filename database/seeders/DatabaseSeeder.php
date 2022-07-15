@@ -15,14 +15,24 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $user = User::create([
-            'username' => 'admin',
-            'nama' => 'admin',
-            'no_hp' => 'admin',
-            'role'    => 'admin',
-            'email'    => 'admin@gmail.com',
-            'password' => Hash::make('admin'),
-        ]);
+        $user = User::create(
+            [
+                'username' => 'pimpinan',
+                'role'     => 'pimpinan',
+                'password' => Hash::make('pimpinan'),
+            ]
+        );
+
+        $user->karyawan()->create(
+            [
+                'nama'      => 'Pimpinan',
+                'nip'       => '123456',
+                'no_hp'     => '012121',
+                'sisa_cuti' => 100,
+                'alamat'    => 'Solo',
+                'foto'      => '',
+            ]
+        );
 
     }
 }

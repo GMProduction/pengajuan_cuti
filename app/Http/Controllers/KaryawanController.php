@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Helper\CustomController;
+use App\Models\type;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
-class KaryawanController extends Controller
+class KaryawanController extends CustomController
 {
 
     /**
@@ -26,9 +29,7 @@ class KaryawanController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @return array|\Illuminate\Http\JsonResponse
      */
     public function create()
     {
@@ -42,6 +43,18 @@ class KaryawanController extends Controller
                     'password' => 'required|confirmed',
                 ]
             );
+            $cekUsername   = User::where([['username', '=', \request('username')], ['id', '!=', \request('id')]])->first();
+            if ($cekUsername) {
+                return \request()->validate(
+                    [
+                        'username' => 'required|string|unique:users,username',
+                    ]
+                );
+            }
+            if (strpos($fieldUser['password'], '*') === false) {
+                $password = Hash::make($fieldUser['password']);
+                Arr::set($fieldUser, 'password', $password);
+            }
 
             $fieldMember = \request()->validate(
                 [
@@ -66,22 +79,37 @@ class KaryawanController extends Controller
                     'nip'   => 'required',
                     'no_hp' => 'required',
                     'foto'  => 'required',
+                    'alamat' => 'required'
                 ]
             );
+
 
             Arr::set($fieldMember, 'sisa_cuti', 13);
 
         }
-        dd($fieldMember);
+        $image = \request('foto');
+        if ($image){
+            $image     = $this->generateImageName('foto');
+            $stringImg = '/images/karyawan/'.$image;
+            $this->uploadImage('foto', $image, 'imageKaryawan');
+            Arr::set($fieldMember, 'foto', $stringImg);
+        }
 
         DB::beginTransaction();
         try {
             if (\request('id')) {
-
+                $user = User::with('karyawan')->find(\request('id'));
+                if ($user->karyawan && $user->karyawan->foto){
+                    if (file_exists('../public'.$user->karyawan->foto)) {
+                        unlink('../public'.$user->karyawan->foto);
+                    }
+                }
+                $user->update($fieldUser);
+                $user->karyawan()->update($fieldMember);
             } else {
                 $user = new User();
-                $user->create($fieldUser);
-                $user->karyawan()->create($fieldMember);
+                $userData = $user->create($fieldUser);
+                $userData->karyawan()->create($fieldMember);
             }
             DB::commit();
 
@@ -143,14 +171,15 @@ class KaryawanController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * @param $id
      *
-     * @param int $id
-     *
-     * @return \Illuminate\Http\Response
+     * @return string
      */
     public function destroy($id)
     {
         //
+        $user = User::find($id);
+        $user->delete();
+        return 'berhasil';
     }
 }

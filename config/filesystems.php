@@ -64,6 +64,12 @@ return [
             'url' => env('AWS_URL'),
             'endpoint' => env('AWS_ENDPOINT'),
         ],
+        'imageKaryawan' => [
+            'driver' => 'local',
+            'root' => public_path() . '/images/karyawan',
+            'url' => env('APP_URL') . '/storage',
+            'visibility' => 'public',
+        ],
 
     ],
 

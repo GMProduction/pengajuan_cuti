@@ -18,36 +18,35 @@
                         <div class="table">
                             <table id="table_id" class="table table-striped" style="width:100%">
                                 <thead>
-                                    <tr>
-                                        <th>No</th>
-                                        {{-- <th>Nama Karyawan</th> --}}
-                                        <th>Tanggal Awal</th>
-                                        {{-- <th>Catatan</th> --}}
-                                        <th>Tanggal Akhir</th>
-                                        <th>Status</th>
-                                        {{-- <th>Action</th> --}}
-                                    </tr>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Tanggal Awal</th>
+                                    <th>Tanggal Akhir</th>
+                                    <th>Jumlah Cuti (hari)</th>
+                                    <th>Status</th>
+                                    {{-- <th>Action</th> --}}
+                                </tr>
                                 </thead>
                                 <tbody class="select">
+                                @forelse($data as $key => $d)
                                     <tr>
-                                        <td>1</td>
-                                        {{-- <td>Karyawan Anak Pak Joko</td> --}}
-                                        <td>12 Juni 2022</td>
-                                        {{-- <td>Pesan banyak</td> --}}
-                                        <td>14 Juni 2022</td>
-                                        <td>Pending</td>
-                                        {{-- <td class="d-flex ">
-                                            <a class="btn-utama sml rnd me-1 d-flex justify-content-center"
-                                                data-bs-toggle="modal" data-bs-target="#detailTransaksi">Detail <i
-                                                    class="material-icons menu-icon ms-2">info</i></a>
-
-
-                                        </td> --}}
+                                        <td>{{$data->firstItem() + $key}}</td>
+                                        <td>{{date('d F Y', strtotime($d->tanggal_mulai))}}</td>
+                                        <td>{{date('d F Y', strtotime($d->tanggal_selesai))}}</td>
+                                        <td>{{$d->total_hari}}</td>
+                                        <td>{{$d->status == 1 ? 'Disetujui' : ($d->status == 2 ? 'Ditolak' : 'Pending')}}</td>
                                     </tr>
-
+                                @empty
+                                    <tr>
+                                        <td class="text-center" colspan="5">Tidak ada data guru</td>
+                                    </tr>
+                                @endforelse
                                 </tbody>
 
                             </table>
+                            <div class="d-flex justify-content-end">
+                                {{$data->links()}}
+                            </div>
                         </div>
                     </div>
 
@@ -65,40 +64,36 @@
                         <h5 class="modal-title" id="titlemodaltambahcuti">Ajukan Cuti</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="modal-body">
+                    <form id="form" onsubmit="return createCuti()">
+                        @csrf
+                        <div class="modal-body">
+                            <div class="form-floating mb-3">
+                                <input type="date" class="form-control" id="start" name="start" placeholder="mulaitanggal">
+                                <label for="start" class="form-label">Mulai Tanggal</label>
+                            </div>
 
 
+                            <div class="form-floating mb-3">
+                                <input type="date" class="form-control" id="end" name="end" placeholder="sampaitanggal">
+                                <label for="end" class="form-label">Sampai Tanggal</label>
+                            </div>
 
-                        <div class="form-floating mb-3">
-                            <input type="date" class="form-control" id="mulaitanggal" name="Mulai Tanggal" placeholder="mulaitanggal">
-                            <label for="mulaitanggal" class="form-label">Mulai Tanggal</label>
+
+                            <div class="form-floating mb-3">
+                            <textarea type="text" class="form-control" id="keterangan" name="keterangan" rows="5"
+                                      placeholder="Jhony"></textarea>
+                                <label for="keterangan" class="form-label">Keterangan</label>
+                            </div>
                         </div>
+                        <div class=" m-3">
+
+                            <div class="text-center">
+                                <button type="submit" class="btn-utama">Simpan</button>
+                            </div>
 
 
-                        <div class="form-floating mb-3">
-                            <input type="date" class="form-control" id="sampaitanggal" name="Sampai Tanggal" placeholder="sampaitanggal">
-                            <label for="sampaitanggal" class="form-label">Sampai Tanggal</label>
                         </div>
-
-
-                        <div class="form-floating mb-3">
-                            <textarea type="text" class="form-control" id="keterangan" name="keterangan"  rows="5"
-                                placeholder="Jhony"></textarea>
-                            <label for="keterangan" class="form-label">Keterangan</label>
-                        </div>
-
-
-
-                    </div>
-
-                    <div class=" m-3">
-
-                        <div class="text-center">
-                            <a class="btn-utama">Simpan</a>
-                        </div>
-
-
-                    </div>
+                    </form>
 
                 </div>
             </div>
@@ -116,13 +111,13 @@
 
                         <div class="form-floating mb-3">
                             <input type="text" class="form-control" id="qty_diminta" name="qty_diminta"
-                                placeholder="qty_diminta" disabled>
+                                   placeholder="qty_diminta" disabled>
                             <label for="qty_diminta" class="form-label">Jumlah yang diminta</label>
                         </div>
 
                         <div class="form-floating mb-3">
                             <input type="text" class="form-control" id="qty_diterima" name="qty_diterima"
-                                placeholder="qty_diterima">
+                                   placeholder="qty_diterima">
                             <label for="qty_diterima" class="form-label">Jumlah yang disetujui</label>
                         </div>
 
@@ -148,7 +143,7 @@
     <script src="{{ asset('js/number_formater.js') }}"></script>
 
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             $('#table_id').DataTable({
                 select: {
                     style: 'single'
@@ -157,10 +152,20 @@
 
             $('#table_detail').DataTable();
         });
+
+        function createCuti() {
+            saveData('Ajukan Cuti', 'form', window.location.pathname, afterSave)
+            return false;
+        }
+
+        function afterSave() {
+
+        }
+
     </script>
-@endsection
+    @endsection
 
 
-</body>
+    </body>
 
-</html>
+    </html>

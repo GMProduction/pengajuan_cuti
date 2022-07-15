@@ -32,7 +32,7 @@
                             <td>{{$data->firstItem() + $key}}</td>
                             <td>{{$d->karyawan ? $d->karyawan->nip : '-'}}</td>
                             <td>{{$d->karyawan ? $d->karyawan->nama : '-'}}</td>
-                            <td><img class="" src="{{ asset('images/local/karyawan.png') }}"/></td>
+                            <td><img class="" src="{{$d->karyawan ? $d->karyawan->foto : ''}}" data-img="{{$d->karyawan ? $d->karyawan->foto : ''}}" id="showImg" role="button"/></td>
                             <td>{{$d->karyawan ? $d->karyawan->alamat : '-'}}</td>
                             <td>{{$d->karyawan ? $d->karyawan->no_hp : '-'}}</td>
                             <td>{{$d->username}}</td>
@@ -41,7 +41,7 @@
                                 <div class="d-flex">
                                     <a class="btn-success sml rnd me-1" data-row='{{$d}}' id="editData">Edit <i
                                             class="material-icons menu-icon ms-2">edit</i></a>
-                                    <a class="btn-danger sml rnd ">Hapus <i
+                                    <a class="btn-danger sml rnd " id="deleteData" data-id="{{$d->id}}">Hapus <i
                                             class="material-icons menu-icon ms-2">delete</i></a>
                                 </div>
                             </td>
@@ -80,7 +80,10 @@
                             <input type="text" class="form-control" id="nama" name="nama" placeholder="Jhony">
                             <label for="nama" class="form-label">Nama Karyawan</label>
                         </div>
-
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="nip" name="nip" placeholder="121515">
+                            <label for="nama" class="form-label">NIP</label>
+                        </div>
                         <label for="role" class="form-label">Role</label>
                         <select class="form-select mb-3" aria-label="Default select example" id="role" name="role">
                             <option selected value="">Pilih Role</option>
@@ -137,6 +140,14 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="modalImg" tabindex="-1" aria-labelledby="modaltambahuser" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content" id="imgFoto">
+
+            </div>
+        </div>
+    </div>
 @endsection
 
 @section('morejs')
@@ -144,7 +155,7 @@
 
     <script>
         $(document).ready(function () {
-
+            // $('#table_piutang').dataTable();
         });
 
         $(document).on('click', '#editData, #addData', function () {
@@ -154,19 +165,39 @@
             $('form #role').val(data?.role);
             $('form #id').val(data?.id);
             $('form #no_hp').val(data?.karyawan?.no_hp);
+            $('form #nip').val(data?.karyawan?.nip);
             $('form #alamat').val(data?.karyawan?.alamat);
             $('form #username').val(data?.username);
+            $('form #password').val(data ? '*******' : '');
+            $('form #password_confirmation').val(data ? '*******' : '');
             $('#modaltambahuser').modal('show')
         })
 
         function createKaryawan() {
-            saveData('Tambah karyawan','form',window.location.pathname,afterSave);
+            saveData('Tambah karyawan','form',window.location.pathname);
             return false;
         }
 
         function afterSave() {
-
+            $('#modaltambahuser').modal('hide')
         }
+
+        $(document).on('click', '#deleteData', function () {
+            console.log('asdasd', $(this).data('id'))
+            let data ={
+                '_token' : '{{csrf_token()}}'
+            }
+            deleteData('delete',window.location.pathname+'/delete/'+$(this).data('id'), data);
+
+        })
+
+        $(document).on('click', '#showImg', function () {
+            console.log()
+            let img = $(this).data('img');
+            $('#imgFoto').html('<img src="'+img+'"/>')
+            $('#modalImg').modal('show')
+
+        })
     </script>
     @endsection
 
