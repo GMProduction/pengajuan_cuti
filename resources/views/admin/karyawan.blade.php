@@ -1,68 +1,79 @@
 @extends('admin.base')
 
 @section('content')
-    <div>
 
 
+    <div class="panel">
+        <div class="title">
+            <p>Data Karyawan</p>
+            <a class="btn-utama-soft  rnd " id="addData">Karyawan Baru <i
+                    class="material-icons menu-icon ms-2">add_circle</i></a>
+        </div>
 
-        <div class="panel">
-            <div class="title">
-                <p>Data Karyawan</p>
-                <a class="btn-utama-soft  rnd " data-bs-toggle="modal" data-bs-target="#modaltambahuser">Karyawan Baru <i
-                        class="material-icons menu-icon ms-2">add_circle</i></a>
-            </div>
-
-            <div class="isi">
-                <div class="table">
-                    <table id="table_piutang" class="table table-striped" style="width:100%">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>NIP</th>
-                                <th>Nama Karyawan</th>
-                                <th>Foto</th>
-                                <th>Alamat</th>
-                                <th>No Hp</th>
-                                <th>Username</th>
-                                <th>Sisa Cuti</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>13546878</td>
-                                <td>Agus</td>
-                                <td><img class="" src="{{ asset('images/local/karyawan.png') }}" /></td>
-                                <td>Jl. jl men</td>
-                                <td>089 750 505 20</td>
-                                <td>agus</td>
-                                <td>12 Hari</td>
-                                <td class="d-flex">
-                                    <a class="btn-success sml rnd me-1">Edit <i
+        <div class="isi">
+            <div class="table">
+                <table id="table_piutang" class="table table-striped" style="width:100%">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>NIP</th>
+                        <th>Nama Karyawan</th>
+                        <th>Foto</th>
+                        <th>Alamat</th>
+                        <th>No Hp</th>
+                        <th>Username</th>
+                        <th>Sisa Cuti</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @forelse($data as $key => $d)
+                        <tr>
+                            <td>{{$data->firstItem() + $key}}</td>
+                            <td>{{$d->karyawan ? $d->karyawan->nip : '-'}}</td>
+                            <td>{{$d->karyawan ? $d->karyawan->nama : '-'}}</td>
+                            <td><img class="" src="{{ asset('images/local/karyawan.png') }}"/></td>
+                            <td>{{$d->karyawan ? $d->karyawan->alamat : '-'}}</td>
+                            <td>{{$d->karyawan ? $d->karyawan->no_hp : '-'}}</td>
+                            <td>{{$d->username}}</td>
+                            <td>{{$d->karyawan ? $d->karyawan->sisa_cuti : '-'}}</td>
+                            <td>
+                                <div class="d-flex">
+                                    <a class="btn-success sml rnd me-1" data-row='{{$d}}' id="editData">Edit <i
                                             class="material-icons menu-icon ms-2">edit</i></a>
                                     <a class="btn-danger sml rnd ">Hapus <i
                                             class="material-icons menu-icon ms-2">delete</i></a>
-                                </td>
-                            </tr>
+                                </div>
+                            </td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td class="text-center" colspan="9">Tidak ada data guru</td>
+                        </tr>
+                    @endforelse
 
+                    </tbody>
 
-                        </tbody>
-
-                    </table>
+                </table>
+                <div class="d-flex justify-content-end">
+                    {{$data->links()}}
                 </div>
             </div>
-
         </div>
 
-        <!-- Modal -->
-        <div class="modal fade" id="modaltambahuser" tabindex="-1" aria-labelledby="modaltambahuser" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="modaltambahuser">Tambah Karyawan</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="modaltambahuser" tabindex="-1" aria-labelledby="modaltambahuser" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modaltambahuser">Tambah Karyawan</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form id="form" onsubmit="">
+                    @csrf
+                    <input hidden id="id" name="id">
                     <div class="modal-body">
 
                         <div class="form-floating mb-3">
@@ -70,42 +81,35 @@
                             <label for="nama" class="form-label">Nama Karyawan</label>
                         </div>
 
-                        {{-- <label for="role" class="form-label">Role</label>
-                        <select class="form-select mb-3" aria-label="Default select example" id="role" name="role">
-                            <option selected>Pilih Role</option>
-                            <option value="admin">Admin</option>
-                            <option value="user">User</option>
-                        </select> --}}
-
                         <label for="role" class="form-label">Role</label>
                         <select class="form-select mb-3" aria-label="Default select example" id="role" name="role">
-                            <option selected>Pilih Role</option>
+                            <option selected value="">Pilih Role</option>
                             <option value="admin">Admin</option>
                             <option value="pimpinan">Pimpinan</option>
                             <option value="karyawan">Karyawan</option>
                         </select>
 
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control " id="nohp" name="nohp"
-                                placeholder="08712345678">
-                            <label for="nohp" class="form-label">No. Hp</label>
+                            <input type="text" class="form-control " id="no_hp" name="no_hp"
+                                   placeholder="08712345678">
+                            <label for="no_hp" class="form-label">No. Hp</label>
                         </div>
 
                         <div class="form-floating mb-3">
                             <input type="alamat" class="form-control" id="alamat" name="alamat" placeholder="alamat">
-                            <label for="floatingInput">Alamat</label>
+                            <label for="alamat">Alamat</label>
                         </div>
 
                         <div class="mb-3">
-                            <label for="fotobarang" class="form-label">Foto Barang</label>
-                            <input class="form-control" type="file" id="fotobarang">
+                            <label for="fotobarang" class="form-label">Foto</label>
+                            <input class="form-control" type="file" id="foto" name="foto">
                         </div>
 
                         <hr>
 
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="nama" name="username" placeholder="Jhony">
-                            <label for="nama" class="form-label">Username</label>
+                            <input type="text" class="form-control" id="username" name="username" placeholder="Jhony">
+                            <label for="username" class="form-label">Username</label>
                         </div>
                         <div class="form-floating mb-3">
                             <input type="password" class="form-control " id="password" name="password" placeholder="Jhony">
@@ -113,7 +117,7 @@
                         </div>
                         <div class="form-floating mb-3">
                             <input type="password" class="form-control " id="password_confirmation"
-                                name="password_confirmation" placeholder="Jhony">
+                                   name="password_confirmation" placeholder="Jhony">
                             <label for="password_confirmation" class="form-label">Konfirmasi Password</label>
                         </div>
 
@@ -128,21 +132,37 @@
 
 
                     </div>
+                </form>
 
-                </div>
             </div>
         </div>
-    @endsection
+    </div>
+@endsection
 
-    @section('morejs')
-        <script src="{{ asset('js/number_formater.js') }}"></script>
+@section('morejs')
+    <script src="{{ asset('js/number_formater.js') }}"></script>
 
-        <script>
-            $(document).ready(function() {
-                $('#table_id').DataTable();
-                $('#table_piutang').DataTable();
-            });
-        </script>
+    <script>
+        $(document).ready(function () {
+
+        });
+
+        $(document).on('click', '#editData, #addData', function () {
+            console.log('asdad', $(this).data('row'))
+            let data = $(this).data('row');
+            $('form #nama').val(data?.karyawan?.nama);
+            $('form #role').val(data?.role);
+            $('form #id').val(data?.id);
+            $('form #no_hp').val(data?.karyawan?.no_hp);
+            $('form #alamat').val(data?.karyawan?.alamat);
+            $('form #username').val(data?.username);
+            $('#modaltambahuser').modal('show')
+        })
+
+        function createKaryawan() {
+
+        }
+    </script>
     @endsection
 
 
