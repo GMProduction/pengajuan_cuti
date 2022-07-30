@@ -73,6 +73,9 @@ class KaryawanController extends CustomController
                 ]
             );
 
+            $password = Hash::make($fieldUser['password']);
+            Arr::set($fieldUser, 'password', $password);
+
             $fieldMember = \request()->validate(
                 [
                     'nama'  => 'required',

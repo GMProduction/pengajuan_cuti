@@ -38,12 +38,7 @@ Route::get(
     }
 );
 
-Route::prefix("pengajuan-cuti")->middleware(\App\Http\Middleware\PimpinanMiddleware::class)->group(
-    function () {
-        Route::get('', [\App\Http\Controllers\PengajuanCutiController::class, 'index']);
-        Route::match(['POST', 'GET'], '/{id}', [\App\Http\Controllers\PengajuanCutiController::class, 'detailCuti']);
-    }
-);
+
 
 Route::prefix('admin')->middleware(\App\Http\Middleware\AdminMiddleware::class)->group(
     function () {
@@ -58,6 +53,12 @@ Route::prefix('admin')->middleware(\App\Http\Middleware\AdminMiddleware::class)-
 
         Route::get('count-worker', [BerandaController::class,'dataKaryawan']);
         Route::get('count-off', [BerandaController::class,'dataKaryawanCuti']);
+        Route::prefix("pengajuan-cuti")->middleware(\App\Http\Middleware\PimpinanMiddleware::class)->group(
+            function () {
+                Route::get('', [\App\Http\Controllers\PengajuanCutiController::class, 'index']);
+                Route::match(['POST', 'GET'], '/{id}', [\App\Http\Controllers\PengajuanCutiController::class, 'detailCuti']);
+            }
+        );
     }
 );
 
