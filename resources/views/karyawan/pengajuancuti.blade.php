@@ -154,7 +154,7 @@
         });
 
         function createCuti() {
-            saveData('Ajukan Cuti', 'form', window.location.pathname, afterSave)
+            saveData('Ajukan Cuti', 'form', window.location.pathname)
             return false;
         }
 
