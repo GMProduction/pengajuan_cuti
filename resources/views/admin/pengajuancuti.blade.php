@@ -178,7 +178,9 @@
                             $('#dk_sampaitanggal').val(res.tanggal_selesai);
                             $('#dk_keterangan').val(res.keterangan);
                             $('#imgAvatar').attr('src',res.karyawan.foto);
-                            $('#btnUpdate').removeClass('d-none')
+                            if (res.status == 0){
+                                $('#btnUpdate').removeClass('d-none')
+                            }
                         }
                     })
                 });
