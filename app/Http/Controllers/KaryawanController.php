@@ -39,6 +39,10 @@ class KaryawanController extends CustomController
             $fieldUser = \request()->validate(
                 [
                     'role'     => 'required',
+                ]
+            );
+            $fieldPassword = \request()->validate(
+                [
                     'username' => 'required|string',
                     'password' => 'required|confirmed',
                 ]
@@ -51,8 +55,8 @@ class KaryawanController extends CustomController
                     ]
                 );
             }
-            if (strpos($fieldUser['password'], '*') === false) {
-                $password = Hash::make($fieldUser['password']);
+            if (strpos($fieldPassword['password'], '*') === false) {
+                $password = Hash::make($fieldPassword['password']);
                 Arr::set($fieldUser, 'password', $password);
             }
 
