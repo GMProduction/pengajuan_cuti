@@ -63,6 +63,7 @@ Route::prefix('admin')->middleware(\App\Http\Middleware\AdminMiddleware::class)-
 );
 
 Route::match(['POST', 'GET'], 'karyawan', [\App\Http\Controllers\Karyawan\KaryawanController::class, 'index'])->middleware(\App\Http\Middleware\KaryawanMiddleware::class);
+Route::get('karyawan', [\App\Http\Controllers\Karyawan\KaryawanController::class, 'profil'])->middleware(\App\Http\Middleware\KaryawanMiddleware::class);
 
 
 Route::match(['POST', 'GET'], '/', [LoginController::class, 'index'])->middleware('guest');
