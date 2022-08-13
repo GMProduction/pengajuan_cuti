@@ -6,8 +6,12 @@
     <div class="panel">
         <div class="title">
             <p>Data Karyawan</p>
-            <a class="btn-utama-soft  rnd " id="addData">Karyawan Baru <i
-                    class="material-icons menu-icon ms-2">add_circle</i></a>
+            <div class="d-flex gap-2">
+                <a class="btn-utama-soft  rnd " id="reseteCuti">Resete Cuti <i
+                        class="material-icons menu-icon ms-2">refresh</i></a>
+                <a class="btn-utama-soft  rnd " id="addData">Karyawan Baru <i
+                        class="material-icons menu-icon ms-2">add_circle</i></a>
+            </div>
         </div>
 
         <div class="isi">
@@ -18,6 +22,7 @@
                         <th>#</th>
                         <th>NIP</th>
                         <th>Nama Karyawan</th>
+                        <th>Role</th>
                         <th>Foto</th>
                         <th>Alamat</th>
                         <th>No Hp</th>
@@ -32,6 +37,7 @@
                             <td>{{$data->firstItem() + $key}}</td>
                             <td>{{$d->karyawan ? $d->karyawan->nip : '-'}}</td>
                             <td>{{$d->karyawan ? $d->karyawan->nama : '-'}}</td>
+                            <td>{{$d->role}}</td>
                             <td><img class="" src="{{$d->karyawan ? $d->karyawan->foto : ''}}" data-img="{{$d->karyawan ? $d->karyawan->foto : ''}}" id="showImg" role="button"/></td>
                             <td>{{$d->karyawan ? $d->karyawan->alamat : '-'}}</td>
                             <td>{{$d->karyawan ? $d->karyawan->no_hp : '-'}}</td>
@@ -174,7 +180,7 @@
         })
 
         function createKaryawan() {
-            saveData('Tambah karyawan','form',window.location.pathname);
+            saveData('Tambah karyawan', 'form', window.location.pathname);
             return false;
         }
 
@@ -184,20 +190,32 @@
 
         $(document).on('click', '#deleteData', function () {
             console.log('asdasd', $(this).data('id'))
-            let data ={
-                '_token' : '{{csrf_token()}}'
+            let data = {
+                '_token': '{{csrf_token()}}'
             }
-            deleteData('delete',window.location.pathname+'/delete/'+$(this).data('id'), data);
+            deleteData('delete', window.location.pathname + '/delete/' + $(this).data('id'), data);
 
         })
 
         $(document).on('click', '#showImg', function () {
             console.log()
             let img = $(this).data('img');
-            $('#imgFoto').html('<img src="'+img+'"/>')
+            $('#imgFoto').html('<img src="' + img + '"/>')
             $('#modalImg').modal('show')
 
         })
+
+        $(document).on('click', '#reseteCuti', function () {
+            let data = {
+              '_token' : '{{csrf_token()}}'
+            };
+            saveDataObjectFormData('Resete Cuti Semua Karyawan',data, window.location.pathname+'/resete-cuti', afterResete)
+            return false;
+        })
+
+       function afterResete(){
+
+        }
     </script>
     @endsection
 

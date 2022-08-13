@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helper\CustomController;
+use App\Models\Karyawan;
 use App\Models\type;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -188,5 +189,14 @@ class KaryawanController extends CustomController
         $user = User::find($id);
         $user->delete();
         return 'berhasil';
+    }
+
+    /**
+     * @return string
+     */
+    public function reseteCuti(){
+        DB::statement('UPDATE `karyawans` SET `sisa_cuti` = 13');
+
+        return 'success';
     }
 }

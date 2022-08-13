@@ -48,6 +48,7 @@ Route::prefix('admin')->middleware(\App\Http\Middleware\AdminMiddleware::class)-
                 Route::match(['POST', 'GET'], '', [KaryawanController::class, 'index']);
                 Route::get('datatable', [KaryawanController::class, 'datatable']);
                 Route::post('delete/{id}', [KaryawanController::class, 'destroy']);
+                Route::post('resete-cuti', [KaryawanController::class, 'reseteCuti'])->middleware(\App\Http\Middleware\PimpinanMiddleware::class);
             }
         );
 
