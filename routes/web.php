@@ -38,8 +38,6 @@ Route::get(
     }
 );
 
-
-
 Route::prefix('admin')->middleware(\App\Http\Middleware\AdminMiddleware::class)->group(
     function () {
         Route::get('', [BerandaController::class, 'index']);
@@ -52,8 +50,8 @@ Route::prefix('admin')->middleware(\App\Http\Middleware\AdminMiddleware::class)-
             }
         );
 
-        Route::get('count-worker', [BerandaController::class,'dataKaryawan']);
-        Route::get('count-off', [BerandaController::class,'dataKaryawanCuti']);
+        Route::get('count-worker', [BerandaController::class, 'dataKaryawan']);
+        Route::get('count-off', [BerandaController::class, 'dataKaryawanCuti']);
         Route::prefix("pengajuan-cuti")->middleware(\App\Http\Middleware\PimpinanMiddleware::class)->group(
             function () {
                 Route::get('', [\App\Http\Controllers\PengajuanCutiController::class, 'index']);
@@ -63,10 +61,13 @@ Route::prefix('admin')->middleware(\App\Http\Middleware\AdminMiddleware::class)-
     }
 );
 
-Route::match(['POST', 'GET'], 'karyawan', [\App\Http\Controllers\Karyawan\KaryawanController::class, 'index'])->middleware(\App\Http\Middleware\KaryawanMiddleware::class);
-Route::get('karyawan', [\App\Http\Controllers\Karyawan\KaryawanController::class, 'profil'])->middleware(\App\Http\Middleware\KaryawanMiddleware::class);
-
+Route::prefix('karyawan')->group(
+    function () {
+        Route::match(['POST', 'GET'], '', [\App\Http\Controllers\Karyawan\KaryawanController::class, 'index'])->middleware(\App\Http\Middleware\KaryawanMiddleware::class);
+        Route::get('profil', [\App\Http\Controllers\Karyawan\ProfileController::class, 'index'])->middleware(\App\Http\Middleware\KaryawanMiddleware::class);
+    }
+);
 
 Route::match(['POST', 'GET'], '/', [LoginController::class, 'index'])->middleware('guest');
-Route::get('/logout',[LoginController::class,'logout'])->middleware('auth');
+Route::get('/logout', [LoginController::class, 'logout'])->middleware('auth');
 

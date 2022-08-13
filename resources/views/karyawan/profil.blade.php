@@ -23,36 +23,36 @@
                             <div class="col-8">
                                 <p class="fw-bold">Data Karyawan</p>
                                 <div class="form-floating mb-1">
-                                    <input type="text" class="form-control" id="dk_namakaryawan" disabled
+                                    <input type="text" class="form-control" id="dk_namakaryawan" disabled value="{{$data->karyawan->nama}}"
                                            name="dk_namakaryawan" placeholder="Karyawan">
                                     <label for="dk_namakaryawan" class="form-label">Nama Karyawan</label>
                                 </div>
 
                                 <div class="form-floating mb-1">
-                                    <textarea class="form-control" placeholder="Leave a comment here" id="dk_alamat" disabled style="height: 100px"></textarea>
+                                    <textarea class="form-control" placeholder="Leave a comment here" id="dk_alamat" disabled style="height: 100px">{{$data->karyawan->alamat}}</textarea>
                                     <label for="dk_alamat">Alamat</label>
                                 </div>
 
                                 <div class="form-floating mb-1">
-                                    <input type="text" class="form-control" id="dk_username" name="dk_username" disabled
+                                    <input type="text" class="form-control" id="dk_username" name="dk_username" value="{{$data->username}}" disabled
                                            placeholder="Karyawan">
                                     <label for="dk_username" class="form-label">Username</label>
                                 </div>
 
                                 <div class="form-floating mb-1">
-                                    <input type="text" class="form-control" id="dk_nohpkaryawan" name="dk_nohpkaryawan"
+                                    <input type="text" class="form-control" id="dk_nohpkaryawan" name="dk_nohpkaryawan" value="{{$data->karyawan->no_hp}}"
                                            disabled placeholder="no_hp">
                                     <label for="dk_nohpkaryawan" class="form-label">No Hp</label>
                                 </div>
 
                                 <div class="form-floating mb-5">
-                                    <input type="text" class="form-control" id="dk_sisacuti" name="dk_sisacuti" disabled
+                                    <input type="text" class="form-control" id="dk_sisacuti" name="dk_sisacuti" disabled value="{{$data->karyawan->sisa_cuti}}"
                                            placeholder="no_hp">
                                     <label for="dk_sisacuti" class="form-label">Sisa Cuti</label>
                                 </div>
                             </div>
                             <div class="col-4">
-                                <img id="imgAvatar" style="width: 100%" src="{{ asset('images/local/karyawan.png') }}"/>
+                                <img id="imgAvatar" style="width: 100%" src="{{ asset($data->karyawan->foto) }}"/>
                             </div>
 
 

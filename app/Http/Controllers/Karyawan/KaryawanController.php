@@ -54,9 +54,5 @@ class KaryawanController extends Controller
 
     }
 
-    public function profil()
-    {
 
-        return view('karyawan.profil', ['sidebar' => 'profil']);
-    }
 }
