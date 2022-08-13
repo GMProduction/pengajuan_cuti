@@ -66,6 +66,7 @@
                     <a class="title-role" href="#"> Karyawan </a>
                 </li>
 
+
                 {{-- <li class="nav-item">
                     <a class="title-role" href="#"> Admin </a>
                 </li>
@@ -113,9 +114,16 @@
                 </li> --}}
 
                 <li class="nav-item">
-                    <a class="nav-link menu @if ($sidebar == 'cuti') active @endif" href="/admin/transaksi">
+                    <a class="nav-link menu @if ($sidebar == 'cuti') active @endif" href="/karyawan">
                         <i class="material-icons menu-icon">content_paste</i>
                         <p class="menu-text">Pengajuan Cuti</p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link menu @if ($sidebar == 'profil') active @endif" href="/karyawan/profil">
+                        <i class="material-icons menu-icon">account_circle</i>
+                        <p class="menu-text">Profil</p>
                     </a>
                 </li>
 
