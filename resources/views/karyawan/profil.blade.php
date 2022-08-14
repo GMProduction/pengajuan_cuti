@@ -1,4 +1,4 @@
-@extends('admin.base')
+@extends('karyawan.base')
 
 @section('content')
     <div>
