@@ -7,7 +7,7 @@
         <div class="title">
             <p>Data Karyawan</p>
             <div class="d-flex gap-2">
-                <a class="btn-utama-soft  rnd " id="reseteCuti">Resete Cuti <i
+                <a class="btn-utama-soft  rnd " id="reseteCuti">Reset Cuti <i
                         class="material-icons menu-icon ms-2">refresh</i></a>
                 <a class="btn-utama-soft  rnd " id="addData">Karyawan Baru <i
                         class="material-icons menu-icon ms-2">add_circle</i></a>

@@ -92,7 +92,7 @@ class KaryawanController extends CustomController
             );
 
 
-            Arr::set($fieldMember, 'sisa_cuti', 13);
+            Arr::set($fieldMember, 'sisa_cuti', 12);
 
         }
         $image = \request('foto');
@@ -195,7 +195,7 @@ class KaryawanController extends CustomController
      * @return string
      */
     public function reseteCuti(){
-        DB::statement('UPDATE `karyawans` SET `sisa_cuti` = 13');
+        DB::statement('UPDATE `karyawans` SET `sisa_cuti` = 12');
 
         return 'success';
     }
