@@ -15,7 +15,8 @@ class PengajuanCuti extends Model
         'tanggal_selesai',
         'total_hari',
         'status',
-        'keterangan'
+        'keterangan',
+        'alasan'
     ];
 
     public function karyawan(){

@@ -36,6 +36,11 @@ class PengajuanCutiController extends Controller
             $cuti->karyawan()->update([
                 'sisa_cuti' => $hasil
             ]);
+        }else{
+            $cuti->update([
+               'alasan' => \request('alasan')
+            ]);
+
         }
 
         $cuti->update([
