@@ -174,28 +174,26 @@
                     <th>Tanggal Awal</th>
                     <th>Tanggal Akhir</th>
                     <th>Jumlah Cuti (hari)</th>
+{{--                    <th>Status</th>--}}
                     {{-- <th class="text-center">Total Harga</th> --}}
                 </tr>
 
             </thead>
             <tbody>
-                <tr>
-                    <td>
-                        1
-                    </td>
-                    <td>
-                        Bagus
-                    </td>
-                    <td>
-                        12 Juni 2022
-                    </td>
-                    <td>
-                        12 Desember 2022
-                    </td>
-                    <td>
-                        150 Hari
-                    </td>
+            @forelse($data as $key => $d)
+                <tr id="editTable" data-id="{{$d->id}}">
+                    <td>{{1 + $key}}</td>
+                    <td>{{$d->karyawan->nama}}</td>
+                    <td>{{date('d F Y', strtotime($d->tanggal_mulai))}}</td>
+                    <td>{{date('d F Y', strtotime($d->tanggal_selesai))}}</td>
+                    <td>{{$d->total_hari}}</td>
+{{--                    <td>{{$d->status == 1 ? 'Disetujui' : ($d->status == 2 ? 'Ditolak' : 'Pending')}}</td>--}}
                 </tr>
+            @empty
+                <tr>
+                    <td class="text-center" colspan="5">Tidak ada data guru</td>
+                </tr>
+            @endforelse
             </tbody>
         </table>
 

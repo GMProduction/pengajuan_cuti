@@ -22,4 +22,8 @@ class Karyawan extends Model
     public function user(){
         return $this->belongsTo(User::class, 'user_id');
     }
+
+    public function cuti() {
+        return $this->hasMany(PengajuanCuti::class,'karyawan_id');
+    }
 }

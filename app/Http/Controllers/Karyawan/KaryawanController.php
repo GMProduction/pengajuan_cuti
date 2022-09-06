@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Karyawan;
 
 use App\Http\Controllers\Controller;
+use App\Models\Karyawan;
 use App\Models\PengajuanCuti;
 use Illuminate\Http\Request;
 
@@ -40,9 +41,8 @@ class KaryawanController extends Controller
         if ($selisih == '-'){
             return response()->json(['msg' => 'Tanggal selesai kurang dari tanggal mulai'], 201);
         }
-        $cuti = new PengajuanCuti();
-        $cuti->create([
-            'karyawan_id' => auth()->id(),
+        $karyawan = Karyawan::where('user_id',auth()->id())->first();
+        $karyawan->cuti()->create([
             'tanggal_mulai' => $start,
             'tanggal_selesai' => $end,
             'total_hari' => $hari,

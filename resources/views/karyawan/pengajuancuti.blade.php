@@ -22,7 +22,7 @@
                                 <th>Tanggal Akhir</th>
                                 <th>Jumlah Cuti (hari)</th>
                                 <th>Status</th>
-                                {{-- <th>Action</th> --}}
+                                <th>Karyawan</th>
                             </tr>
                             </thead>
                             <tbody class="select">
@@ -33,6 +33,7 @@
                                     <td>{{date('d F Y', strtotime($d->tanggal_selesai))}}</td>
                                     <td>{{$d->total_hari}}</td>
                                     <td>{{$d->status == 1 ? 'Disetujui' : ($d->status == 2 ? 'Ditolak' : 'Pending')}}</td>
+                                    <td>{{$d->keterangan}}</td>
                                 </tr>
                             @empty
                                 <tr>
@@ -77,14 +78,14 @@
                         </div>
 
                         <label for="keterangan" class="form-label">Jenis Cuti</label>
-                            <select class="form-select" aria-label="Default select example" id="keterangan">
-                                <option selected>Pilih Cuti</option>
-                                <option value="Cuti Tahunan">Cuti Tahunan</option>
-                                <option value="Cuti Melahirkan">Cuti Melahirkan</option>
-                                <option value="Cuti Sakit">Cuti Sakit</option>
-                                <option value="Cuti Besar">Cuti Besar</option>
-                                <option value="Cuti Karena Alasan Penting">Cuti Karena Alasan Penting</option>
-                              </select>
+                        <select class="form-select" aria-label="Default select example" name="keterangan" id="keterangan">
+                            <option selected>Pilih Cuti</option>
+                            <option value="Cuti Tahunan">Cuti Tahunan</option>
+                            <option value="Cuti Melahirkan">Cuti Melahirkan</option>
+                            <option value="Cuti Sakit">Cuti Sakit</option>
+                            <option value="Cuti Besar">Cuti Besar</option>
+                            <option value="Cuti Karena Alasan Penting">Cuti Karena Alasan Penting</option>
+                        </select>
                     </div>
                     <div class=" m-3">
 

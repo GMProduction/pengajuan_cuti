@@ -25,7 +25,6 @@ class PengajuanCutiController extends Controller
     public function updatePengajuan($id){
         $status = \request('status');
         $cuti = PengajuanCuti::find($id);
-
         if ($status == 1){
             $sisa = (int)$cuti->karyawan->sisa_cuti;
             $total = (int)$cuti->total_hari;
@@ -51,21 +50,20 @@ class PengajuanCutiController extends Controller
         return 'berhasil';
     }
 
-    public function cetakLaporan($id)
+    public function cetakLaporan()
     {
-//        return $this->dataTransaksi($id);
+//        return $this->dataTransaksi();
         $pdf = App::make('dompdf.wrapper');
-        $pdf->loadHTML($this->dataTransaksi($id))->setPaper('f4', 'potrait');
+        $pdf->loadHTML($this->dataTransaksi())->setPaper('f4', 'potrait');
 
         return $pdf->stream();
     }
 
-    public function dataTransaksi($id)
+    public function dataTransaksi()
     {
-        // $trans = Transaksi::with(['cart.barang','user'])->find($id);
-//        return $trans;
+         $trans = PengajuanCuti::with(['karyawan.user'])->where('status',1)->get();
         // return view('admin/laporanpesanan',['data' => $trans]);
-        return view('admin/laporancuti');
+        return view('admin/laporancuti',['data' => $trans]);
     }
 
 

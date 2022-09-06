@@ -9,7 +9,7 @@
             <div class="panel">
                 <div class="title">
                     <p>Pengajuan Cuti</p>
-                    <a class="btn-accent  rnd " href="/admin/cetak/1">Cetak <i
+                    <a class="btn-accent  rnd " href="/admin/cetak">Cetak <i
                             class="material-icons menu-icon ms-2" >print</i></a>
                 </div>
 

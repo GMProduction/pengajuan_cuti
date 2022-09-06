@@ -40,7 +40,7 @@ Route::get(
     }
 );
 
-Route::get('admin/cetak/{id}', [PengajuanCutiController::class, 'cetakLaporan']);
+Route::get('admin/cetak', [PengajuanCutiController::class, 'cetakLaporan']);
 
 Route::prefix('admin')->middleware(\App\Http\Middleware\AdminMiddleware::class)->group(
     function () {
@@ -68,7 +68,7 @@ Route::prefix('admin')->middleware(\App\Http\Middleware\AdminMiddleware::class)-
 Route::prefix('karyawan')->group(
     function () {
         Route::match(['POST', 'GET'], '', [\App\Http\Controllers\Karyawan\KaryawanController::class, 'index'])->middleware(\App\Http\Middleware\KaryawanMiddleware::class);
-        Route::get('profil', [\App\Http\Controllers\Karyawan\ProfileController::class, 'index'])->middleware(\App\Http\Middleware\KaryawanMiddleware::class);
+        Route::match(['POST', 'GET'],'profil', [\App\Http\Controllers\Karyawan\ProfileController::class, 'index'])->middleware(\App\Http\Middleware\KaryawanMiddleware::class);
     }
 );
 
