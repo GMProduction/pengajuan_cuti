@@ -9,8 +9,8 @@
             <div class="panel">
                 <div class="title">
                     <p>Pengajuan Cuti</p>
-                    {{-- <a class="btn-utama-soft  rnd ">Pesanan Baru <i
-                            class="material-icons menu-icon ms-2">add_circle</i></a> --}}
+                    <a class="btn-accent  rnd " href="/admin/cetak/1">Cetak <i
+                            class="material-icons menu-icon ms-2" >print</i></a>
                 </div>
 
                 <div class="isi">

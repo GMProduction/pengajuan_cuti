@@ -10,7 +10,9 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\MasterBarangController;
 use App\Http\Controllers\MasterPelangganController;
+use App\Http\Controllers\PengajuanCutiController;
 use App\Http\Controllers\UserController;
+use App\Models\PengajuanCuti;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -37,6 +39,8 @@ Route::get(
         return view('admin.user');
     }
 );
+
+Route::get('admin/cetak/{id}', [PengajuanCutiController::class, 'cetakLaporan']);
 
 Route::prefix('admin')->middleware(\App\Http\Middleware\AdminMiddleware::class)->group(
     function () {

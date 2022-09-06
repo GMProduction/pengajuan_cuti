@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\PengajuanCuti;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 
 class PengajuanCutiController extends Controller
 {
@@ -49,5 +50,23 @@ class PengajuanCutiController extends Controller
 
         return 'berhasil';
     }
+
+    public function cetakLaporan($id)
+    {
+//        return $this->dataTransaksi($id);
+        $pdf = App::make('dompdf.wrapper');
+        $pdf->loadHTML($this->dataTransaksi($id))->setPaper('f4', 'potrait');
+
+        return $pdf->stream();
+    }
+
+    public function dataTransaksi($id)
+    {
+        // $trans = Transaksi::with(['cart.barang','user'])->find($id);
+//        return $trans;
+        // return view('admin/laporanpesanan',['data' => $trans]);
+        return view('admin/laporancuti');
+    }
+
 
 }

@@ -76,12 +76,15 @@
                             <label for="end" class="form-label">Sampai Tanggal</label>
                         </div>
 
-
-                        <div class="form-floating mb-3">
-                            <textarea type="text" class="form-control" id="keterangan" name="keterangan" rows="5"
-                                      placeholder="Jhony"></textarea>
-                            <label for="keterangan" class="form-label">Keterangan</label>
-                        </div>
+                        <label for="keterangan" class="form-label">Jenis Cuti</label>
+                            <select class="form-select" aria-label="Default select example" id="keterangan">
+                                <option selected>Pilih Cuti</option>
+                                <option value="Cuti Tahunan">Cuti Tahunan</option>
+                                <option value="Cuti Melahirkan">Cuti Melahirkan</option>
+                                <option value="Cuti Sakit">Cuti Sakit</option>
+                                <option value="Cuti Besar">Cuti Besar</option>
+                                <option value="Cuti Karena Alasan Penting">Cuti Karena Alasan Penting</option>
+                              </select>
                     </div>
                     <div class=" m-3">
 

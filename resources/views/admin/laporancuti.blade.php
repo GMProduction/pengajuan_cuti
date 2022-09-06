@@ -139,7 +139,7 @@
         {{-- <img src="{{ public_path('static-image/logo.png') }}" style="width: 120px; float: left;" /> --}}
 
         <div>
-            <h4 style=" text-align: center;margin-bottom:10px ;margin-top:0">LAPORAN PESANAN</h4>
+            <h4 style=" text-align: center;margin-bottom:10px ;margin-top:0">LAPORAN CUTI</h4>
 
             <table style="border: 0">
                 <tr style="border: 0">
@@ -148,93 +148,17 @@
                             <table style=" table-layout: auto">
                                 <tr style="border: 0">
                                     <td class="text-left" style="font-weight: bold; font-size: 1rem" colspan="3">
-                                        Data Transaksi
+                                        Data Cuti Tahun 2022
                                     </td>
 
                                 </tr>
-                                <tr style="border: 0">
-                                    <td class="text-left">
-                                        No. Transaksi
-                                    </td>
-                                    <td class="text-left" style="width: 10px !important; ">
-                                        :
-                                    </td>
-                                    <td class="text-left">
-                                        124
-                                    </td>
-                                </tr>
-                                <tr style="border: 0">
-                                    <td class="text-left">
-                                        Tanggal Pesanan
-                                    </td>
-                                    <td class="text-left" style="width: 10px !important;">
-                                        :
-                                    </td>
-                                    <td class="text-left">
-                                        12 Juni 2022
-                                    </td>
 
-                                </tr>
-                                <tr style="border: 0">
-                                    <td class="text-left">
-                                        Catatan Dari Karyawan
-                                    </td>
-                                    <td class="text-left" style="width: 10px !important; ">
-                                        :
-                                    </td>
-                                    <td class="text-left">
-                                        Tolong disegerakan
-                                    </td>
 
-                                </tr>
                             </table>
                         </div>
                     </td>
                     <td>
-                        <table style="border: 1px solid #ccc; table-layout: auto">
-                            <tr style="border: 0">
-                                <td class="text-left" style="font-weight: bold; font-size: 1rem" colspan="3">
-                                    Data Karyawan
-                                </td>
 
-                            </tr>
-                            <tr style="border: 0">
-                                <td class="text-left">
-                                    Nama Karyawan
-                                </td>
-                                <td class="text-left" style="width: 10px !important; ">
-                                    :
-                                </td>
-                                <td class="text-left">
-                                    124
-                                </td>
-                            </tr>
-                            <tr style="border: 0">
-                                <td class="text-left">
-                                    No. Hp
-                                </td>
-                                <td class="text-left" style="width: 10px !important;">
-                                    :
-                                </td>
-                                <td class="text-left">
-                                    (0274) 586563
-                                </td>
-
-                            </tr>
-                            <tr style="border: 0">
-                                <td class="text-left">
-                                    Alamat
-                                </td>
-                                <td class="text-left" style="width: 10px !important; ">
-                                    :
-                                </td>
-                                <td class="text-left">
-                                    Jl. Kapas No.10, Semaki, Kec. Umbulharjo, Kota Yogyakarta, Daerah Istimewa
-                                    Yogyakarta 55166
-                                </td>
-
-                            </tr>
-                        </table>
                     </td>
                 </tr>
             </table>
@@ -245,11 +169,11 @@
         <table style="margin-bottom: 10px">
             <thead>
                 <tr>
-                    <th style="width: 10px" class="text-center">#</th>
-                    <th class="text-center">Nama Barang</th>
-                    <th class="text-center">Jumlah diminta</th>
-                    <th class="text-center">Jumlah disetujui</th>
-                    <th class="text-center">Status</th>
+                    <th>No</th>
+                    <th>Nama Karyawan</th>
+                    <th>Tanggal Awal</th>
+                    <th>Tanggal Akhir</th>
+                    <th>Jumlah Cuti (hari)</th>
                     {{-- <th class="text-center">Total Harga</th> --}}
                 </tr>
 
@@ -260,16 +184,16 @@
                         1
                     </td>
                     <td>
-                        Bed
+                        Bagus
                     </td>
                     <td>
-                        5
+                        12 Juni 2022
                     </td>
                     <td>
-                        3
+                        12 Desember 2022
                     </td>
                     <td>
-                        dikirim
+                        150 Hari
                     </td>
                 </tr>
             </tbody>
